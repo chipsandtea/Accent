@@ -13,6 +13,8 @@
 * Synthesize the corrected text into speech using Speech Synthesis software
 * User Accounts and backend to store past queries.
 
+---
+
 ## User Stories for Release
 * Sprint 1 - Leverage iOS 10 API
 	* As a user, I want the app to be able to recognize what I'm saying.
