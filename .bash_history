@@ -112,3 +112,35 @@ vi README
 git
 ls
 exit
+ls
+git init
+ls
+git add .
+git commit -m "first commit"
+git config --global user.name "Jeremiah Liou
+git config --global user.email jeremiahjliou@gmail.com
+exit
+git commit -m "first commit"
+git config user.email jeremiahjliou@gmail.com
+git config user.name Jeremiah Liou
+git commit -m "first commit"
+ls
+git
+git help -a
+ls
+git remote add origin https://github.com/chipsandtea/Accent.git
+git remote -v
+git push -u origin master
+ls
+git push --help
+git pull
+ls
+git
+git branch
+ls
+git push -u origin master
+ls
+git pull
+git fetch
+ls
+git pull https://github.com/chipsandtea/Accent.git
