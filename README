@@ -1,6 +1,6 @@
 The web2py is installed inside my folder in the server. To start web2py from my server:
 1. navigate to /home/jliou/web2py
-2. type “python web2py.py —ip 159.203.233.58 -e”
+2. type “python web2py.py -—ip 159.203.233.58 -e”
 
 This will get web2py up and running and you can access the login page from:
 http://159.203.233.58:8000/hello/default/user/login on a web browser.
