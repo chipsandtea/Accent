@@ -1,4 +1,4 @@
-# Sprint 1 Plan
+# Sprint 2 Plan
 * Product Name: Accent
 * Team Name: Accent Team
 * Sprint Completion Date: Friday, Nov 4th, 2016
