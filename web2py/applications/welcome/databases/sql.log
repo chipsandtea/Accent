@@ -79,3 +79,21 @@ CREATE TABLE pet(
     info CHAR(512)
 );
 success!
+timestamp: 2016-10-28T20:29:34.129963
+CREATE TABLE accounts(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    firstname CHAR(512),
+    lastname CHAR(512),
+    password CHAR(512),
+    email CHAR(512)
+);
+success!
+timestamp: 2016-10-28T20:35:37.921812
+CREATE TABLE acc(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    firstname CHAR(512),
+    lastname CHAR(512),
+    password CHAR(512),
+    email CHAR(512)
+);
+success!

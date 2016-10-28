@@ -9,14 +9,16 @@
 
 import datetime
 
-db.define_table('person',
-                Field('name'),
-                Field('info'))
+db.define_table('acc',
+                Field('firstname'),
+                Field('lastname'),
+                Field('password'),
+                Field('email'))
 
-db.define_table('pet',
-                Field('ownedby', db.person),
-                Field('name'),
-                Field('info'))
+#db.define_table('pet',
+ #               Field('ownedby', db.person),
+  #              Field('name'),
+   #             Field('info'))
 
 # I don't want to display the user email by default in all forms.
 

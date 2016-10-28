@@ -27,14 +27,14 @@ def api():
     response.view = 'generic.json'
 
     def GET(tablename, id):
-        if not tablename == 'person':
+        if not tablename == 'acc':
             raise HTTP(400)
-        return dict(person = db.person(id))
+        return dict(person = db.acc(id))
 
     def POST(tablename, **fields):
-        if not tablename == 'person':
+        if not tablename == 'acc':
             raise HTTP(400)
-        return response.json(db.person.validate_and_insert(**fields))
+        return response.json(db.acc.validate_and_insert(**fields))
       #  if table_name == 'person':
        #     return dict(db.person.validate_and_insert(**vars))
        # elif table_name == 'pet':
