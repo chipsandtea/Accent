@@ -26,9 +26,9 @@ PIDDIR=/var/run/$NAME
 PIDFILE=$PIDDIR/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 DAEMON=/usr/bin/python
-DAEMON_DIR=/usr/lib/$NAME
+DAEMON_DIR=/home/jliou/$NAME
 DAEMON_ARGS="web2py.py --password=<recycle> --pid_filename=$PIDFILE"
-DAEMON_USER=web2py
+DAEMON_USER=www-data
 
 # Exit if the package is not installed
 [ -x "$DAEMON" ] || exit 0

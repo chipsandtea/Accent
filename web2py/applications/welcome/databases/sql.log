@@ -1,4 +1,4 @@
-timestamp: 2016-10-28T20:06:31.107767
+timestamp: 2016-10-28T21:43:55.910879
 CREATE TABLE web2py_session_welcome(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     locked CHAR(1),
@@ -9,7 +9,7 @@ CREATE TABLE web2py_session_welcome(
     session_data BLOB
 );
 success!
-timestamp: 2016-10-28T20:06:31.243405
+timestamp: 2016-10-28T21:43:55.943172
 CREATE TABLE auth_user(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name CHAR(128),
@@ -21,21 +21,21 @@ CREATE TABLE auth_user(
     registration_id CHAR(512)
 );
 success!
-timestamp: 2016-10-28T20:06:31.251246
+timestamp: 2016-10-28T21:43:55.947655
 CREATE TABLE auth_group(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     role CHAR(512),
     description TEXT
 );
 success!
-timestamp: 2016-10-28T20:06:31.255837
+timestamp: 2016-10-28T21:43:55.952086
 CREATE TABLE auth_membership(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
     group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  
 );
 success!
-timestamp: 2016-10-28T20:06:31.260369
+timestamp: 2016-10-28T21:43:55.956376
 CREATE TABLE auth_permission(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  ,
@@ -44,7 +44,7 @@ CREATE TABLE auth_permission(
     record_id INTEGER
 );
 success!
-timestamp: 2016-10-28T20:06:31.265817
+timestamp: 2016-10-28T21:43:55.960721
 CREATE TABLE auth_event(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     time_stamp TIMESTAMP,
@@ -54,7 +54,7 @@ CREATE TABLE auth_event(
     description TEXT
 );
 success!
-timestamp: 2016-10-28T20:06:31.270687
+timestamp: 2016-10-28T21:43:55.965712
 CREATE TABLE auth_cas(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
@@ -64,31 +64,7 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
-timestamp: 2016-10-28T20:06:31.278171
-CREATE TABLE person(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name CHAR(512),
-    info CHAR(512)
-);
-success!
-timestamp: 2016-10-28T20:06:31.282609
-CREATE TABLE pet(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    ownedby INTEGER REFERENCES person (id) ON DELETE CASCADE  ,
-    name CHAR(512),
-    info CHAR(512)
-);
-success!
-timestamp: 2016-10-28T20:29:34.129963
-CREATE TABLE accounts(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    firstname CHAR(512),
-    lastname CHAR(512),
-    password CHAR(512),
-    email CHAR(512)
-);
-success!
-timestamp: 2016-10-28T20:35:37.921812
+timestamp: 2016-10-28T21:43:55.975121
 CREATE TABLE acc(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     firstname CHAR(512),

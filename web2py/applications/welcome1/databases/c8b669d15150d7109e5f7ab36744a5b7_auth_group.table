@@ -1,5 +1,5 @@
 (dp1
-S'info'
+S'role'
 p2
 (dp3
 S'length'
@@ -10,7 +10,7 @@ p5
 I00
 sS'sortable'
 p6
-I4
+I2
 sS'sql'
 p7
 S'CHAR(512)'
@@ -38,37 +38,21 @@ sg9
 I00
 sg10
 g12
-ssS'name'
+ssS'description'
 p15
 (dp16
 g4
-I512
+I32768
 sg5
 I00
 sg6
 I3
 sg7
-S'CHAR(512)'
+S'TEXT'
 p17
 sg9
 I00
 sg10
-g11
-ssS'ownedby'
+S'text'
 p18
-(dp19
-g4
-I512
-sg5
-I00
-sg6
-I2
-sg7
-S'INTEGER REFERENCES person (id) ON DELETE CASCADE  '
-p20
-sg9
-I00
-sg10
-S'reference person'
-p21
 ss.
