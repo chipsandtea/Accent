@@ -8,18 +8,41 @@
 # - download is for downloading files uploaded in the db (does streaming)
 # -------------------------------------------------------------------------
 
-
+#@auth.requires_login()
 def index():
     """
-    example action using the internationalization operator T and flash
-    rendered by views/default/index.html or views/generic.html
-
-    if you need a simple wiki simply replace the two lines below with:
-    return auth.wiki()
+    This is your main controller.
     """
-    response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'))
+    # I am creating a bogus list here, just to have some divs appear in the
+    # view.  You need to read at most 20 posts from the database, in order of
+    # most recent first, and you need to return that list here.
+    # Note that posts is NOT a list of strings in your actual code; it is
+    # what you get from a db(...).select(...).
+    posts = ['banana', 'pear', 'eggplant']
+    return dict(posts=posts)
 
+
+@request.restful()
+def api():
+    response.view = 'generic.json'
+
+    def GET(tablename, id):
+        if not tablename == 'person':
+            raise HTTP(400)
+        return dict(person = db.person(id))
+
+    def POST(tablename, **fields):
+        if not tablename == 'person':
+            raise HTTP(400)
+        return response.json(db.person.validate_and_insert(**fields))
+      #  if table_name == 'person':
+       #     return dict(db.person.validate_and_insert(**vars))
+       # elif table_name == 'pet':
+       #     return dict(db.pet.validate_and_insert(**vars))
+       # else:
+       #     raise HTTP(400)  
+    #locals() returns a dictionary including all the variables in the local function         
+    return locals()      
 
 def user():
     """
