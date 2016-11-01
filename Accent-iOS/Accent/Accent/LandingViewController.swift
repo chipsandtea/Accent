@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import TextFieldEffects
 
 class LandingViewController: UIViewController {
 
     @IBOutlet var loginView: UIView!
     @IBOutlet var loginButton: UIButton!
+    @IBOutlet var loginUsername: JiroTextField!
     
     
     override func viewDidLoad() {
