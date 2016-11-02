@@ -8,6 +8,8 @@ target 'Accent' do
 
   # Pods for Accent
   pod 'TextFieldEffects', '~> 1.3.0'
+
+  pod 'Alamofire', '~> 1.2'
 end
 
 post_install do |installer|

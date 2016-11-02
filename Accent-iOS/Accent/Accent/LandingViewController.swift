@@ -7,14 +7,15 @@
 //
 
 import UIKit
+import TextFieldEffects
 
 class LandingViewController: UIViewController {
 
     @IBOutlet var loginView: UIView!
-//    @IBOutlet var loginButton: UIButton!
-//    @IBOutlet var loginUsername: IsaoTextField!
-//    @IBOutlet var loginPassword: IsaoTextField!
-//    
+    @IBOutlet var loginButton: UIButton!
+    @IBOutlet var loginUsername: IsaoTextField!
+    @IBOutlet var loginPassword: IsaoTextField!
+
     @IBOutlet var registerViewButton: UIButton!
     
     override func viewDidLoad() {

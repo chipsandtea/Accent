@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3A57560113A1BA3DB6A9659DDA039F6B"
-               BuildableName = "TextFieldEffects.framework"
-               BlueprintName = "TextFieldEffects"
+               BlueprintIdentifier = "265AD71FE3DCFCE85B82FCA721DCE799"
+               BuildableName = "Alamofire.framework"
+               BlueprintName = "Alamofire"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3A57560113A1BA3DB6A9659DDA039F6B"
-            BuildableName = "TextFieldEffects.framework"
-            BlueprintName = "TextFieldEffects"
+            BlueprintIdentifier = "265AD71FE3DCFCE85B82FCA721DCE799"
+            BuildableName = "Alamofire.framework"
+            BlueprintName = "Alamofire"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
