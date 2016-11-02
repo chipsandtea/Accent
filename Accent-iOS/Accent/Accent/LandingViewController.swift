@@ -13,18 +13,20 @@ class LandingViewController: UIViewController {
 
     @IBOutlet var loginView: UIView!
     @IBOutlet var loginButton: UIButton!
-    @IBOutlet var loginUsername: JiroTextField!
+    @IBOutlet var loginUsername: IsaoTextField!
+    @IBOutlet var loginPassword: IsaoTextField!
     
+    @IBOutlet var registerViewButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
         
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.statusBarStyle = .lightContent
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -42,6 +44,10 @@ class LandingViewController: UIViewController {
         self.navigationController?.pushViewController(speechVC, animated: true)
     }
     
+    @IBAction func displayRegisterView(_ sender: AnyObject) {
+        let registerVC = self.storyboard?.instantiateViewController(withIdentifier: "RegisterVC") as! RegisterViewController
+        self.navigationController?.pushViewController(registerVC, animated: true)
+    }
     
     
 }

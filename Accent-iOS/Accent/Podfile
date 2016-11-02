@@ -5,5 +5,5 @@ target 'Accent' do
   use_frameworks!
 
   # Pods for Accent
-
+  pod "TextFieldEffects"
 end

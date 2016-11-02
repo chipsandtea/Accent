@@ -9,10 +9,20 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>TextFieldEffects.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>6340F7811CE72B3985E7CFF99CB2A4BD</key>
+		<key>23FE51E7B2E2F4FB95040D66A3AE7C3B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9F6CAEC726C36974F373AAD90588A52D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
