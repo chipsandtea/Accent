@@ -1,0 +1,15 @@
+PODS:
+  - Alamofire (4.0.1)
+  - TextFieldEffects (1.3.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.0)
+  - TextFieldEffects (~> 1.3.0)
+
+SPEC CHECKSUMS:
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  TextFieldEffects: ef594746f17997c813e07633f8ae5acaf9b04f27
+
+PODFILE CHECKSUM: 52eb4c931a44e77edaf766a75599a9395c87506c
+
+COCOAPODS: 1.0.1
