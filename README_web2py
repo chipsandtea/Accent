@@ -1,0 +1,37 @@
+The web2py is installed inside my folder in the server. To start web2py from my server:
+1. navigate to /home/jliou/web2py
+2. type “python web2py.py -—ip 159.203.233.58 -e”
+
+This will get web2py up and running and you can access on a web browser:
+http://159.203.233.58:8000/accent/default/index
+
+=====Account requests=====
+
+GET request:
+http://159.203.233.58:8000/accent/default/api/acc/3
+or
+curl http://159.203.58:8000/accent/default/api/acc/3
+
+Example response:
+{"acc": {"firstname": "leslie", "lastname": "li", "id":3, "password": "1234", "email": "leslie@example.com"}}
+
+
+
+POST request:
+curl -d "firstname=hi&lastname=hello&password=12345&email=hello@gmail.com" http://159.203.233.58:8000/accent/default/api/acc
+
+Example response:
+{"acc": {"errors": {}, "id": 3}, "status": success"}
+
+====Test requests==============
+
+POST request:
+curl -d "" http://159.203.233.58:8000/accent/default/api/test
+
+Example response:
+{"test": "== TEST CALL == 2016-11-04", "status": "success"}
+
+======Linux Daemon=============
+To access the web2py via the server it is running via 24/7:
+
+The url is: 159.203.233.58, it should redirect you to http://159.203.233.58/welcome/default/index

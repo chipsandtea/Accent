@@ -7,6 +7,7 @@
 # - user is required for authentication and authorization
 # - download is for downloading files uploaded in the db (does streaming)
 # -------------------------------------------------------------------------
+from test_script import demoCall
 
 #@auth.requires_login()
 def index():
@@ -29,12 +30,22 @@ def api():
     def GET(tablename, id):
         if not tablename == 'acc':
             raise HTTP(400)
-        return dict(person = db.acc(id))
+        return dict(acc = db.acc(id))
 
+    #temp returning status success until we have validation in place
     def POST(tablename, **fields):
-        if not tablename == 'acc':
-            raise HTTP(400)
-        return response.json(db.acc.validate_and_insert(**fields))
+        status = None
+        if tablename == 'acc':
+            #TODO: check if acc exists? look up validate_and_insert return val
+            status = 'success'
+            resp = dict(status = status,acc = db.acc.validate_and_insert(**fields))
+            return response.json(resp)
+        elif tablename == 'test':
+	    status = 'success'
+	    resp = dict(status = status, test = demoCall())
+	    return response.json(resp)
+	else:
+	    raise HTTP(400);
       #  if table_name == 'person':
        #     return dict(db.person.validate_and_insert(**vars))
        # elif table_name == 'pet':
