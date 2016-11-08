@@ -1,4 +1,3 @@
-########### Python 3.2 #############
 import http.client, urllib.request, urllib.parse, urllib.error, base64
 
 headers = {
