@@ -73,3 +73,14 @@ CREATE TABLE acc(
     email CHAR(512)
 );
 success!
+timestamp: 2016-11-08T22:05:00.847754
+CREATE TABLE web2py_session_welcome1(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    locked CHAR(1),
+    client_ip CHAR(64),
+    created_datetime TIMESTAMP,
+    modified_datetime TIMESTAMP,
+    unique_key CHAR(64),
+    session_data BLOB
+);
+success!

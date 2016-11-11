@@ -26,7 +26,7 @@ PIDDIR=/var/run/$NAME
 PIDFILE=$PIDDIR/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 DAEMON=/usr/bin/python
-DAEMON_DIR=/home/jliou/$NAME
+DAEMON_DIR=/home/www-data/$NAME
 DAEMON_ARGS="web2py.py --password=<recycle> --pid_filename=$PIDFILE"
 DAEMON_USER=www-data
 
