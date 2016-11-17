@@ -5,17 +5,15 @@ The web2py is installed inside my folder in the server. To start web2py from my 
 This will get web2py up and running and you can access on a web browser:
 http://159.203.233.58:8000/accent/default/index
 
-=====Account requests=====
+=====Local requests=====
 
 GET request:
 http://159.203.233.58:8000/accent/default/api/acc/3
 or
-curl http://159.203.58:8000/accent/default/api/acc/3
+curl http://159.203.233.58:8000/accent/default/api/acc/3
 
 Example response:
 {"acc": {"firstname": "leslie", "lastname": "li", "id":3, "password": "1234", "email": "leslie@example.com"}}
-
-
 
 POST request:
 curl -d "firstname=hi&lastname=hello&password=12345&email=hello@gmail.com" http://159.203.233.58:8000/accent/default/api/acc
@@ -23,13 +21,29 @@ curl -d "firstname=hi&lastname=hello&password=12345&email=hello@gmail.com" http:
 Example response:
 {"acc": {"errors": {}, "id": 3}, "status": success"}
 
-====Test requests==============
+=====Server requests==============
 
-POST request:
-curl -d "" http://159.203.233.58:8000/accent/default/api/test
+GET request:
+http://159.203.233.58/accent/default/api/acc/1
+or
+curl http://159.203.233.58/accent/default/api/acc/1
 
 Example response:
-{"test": "== TEST CALL == 2016-11-04", "status": "success"}
+{"acc": {"firstname": "leslie", "lastname": "li", "id": 1, "password": "123", "email": "leslie@example.com"}}
+
+POST request:
+curl -d "firstname=hi&lastname=hello&password=12345&email=hello@gmail.com" http://159.203.233.58/accent/default/api/acc
+
+Example response:
+{"acc": {"errors": {}, "id": 1}, "status": "success"}
+
+View database:
+sqlite3 storage.sqlite
+SELECT * from 'table_name';
+
+Deleting from the database:
+delete from your_table;
+delete from sqlite_sequence where name='your_table';  (resets id for the table)
 
 ======Linux Daemon=============
 To access the web2py via the server it is running via 24/7:

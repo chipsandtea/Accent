@@ -36,9 +36,18 @@ def api():
     def POST(tablename, **fields):
         status = None
         if tablename == 'acc':
-            #TODO: check if acc exists? look up validate_and_insert return val
-            status = 'success'
-            resp = dict(status = status,acc = db.acc.validate_and_insert(**fields))
+            #TODO: check if acc exists? look up validate_and_insert return value
+	    existing = db(db.acc.email == request.post_vars.email).select().first()
+            if existing is None:
+       	        logger.info('email doesnt exist, success response')
+                status = 'success'
+		resp = dict(status = status, acc = db.acc.validate_and_insert(**fields))
+	    else: 
+                logger.info('email exists')
+            	resp = dict(status = 'failure', error = 'email already exists')
+		#logger.info('acc email field: ' + request.post_vars.email)
+
+            #resp = dict(status = status,acc = db.acc.validate_and_insert(**fields))
             return response.json(resp)
         elif tablename == 'test':
 	    status = 'success'
