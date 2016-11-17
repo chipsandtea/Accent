@@ -8,6 +8,8 @@
 
 import UIKit
 import TextFieldEffects
+import Alamofire
+import SCLAlertView
 
 class LandingViewController: UIViewController {
 
@@ -49,6 +51,25 @@ class LandingViewController: UIViewController {
         self.navigationController?.pushViewController(registerVC, animated: true)
     }
     
+    func processLogin() {
+        let parameters : [String : String] = [
+            "email" : loginUsername.text!,
+            "password" : loginPassword.text!
+        ]
+        
+        print(parameters)
+        
+        Alamofire.request("http://159.203.233.58/accent/default/api/login", method: .post, parameters: parameters, encoding: URLEncoding.default)
+            .responseString { response in
+                
+                print(response)
+                
+                SUCCESS: {"acc": {"errors": {}, "id": 15}, "status": "success"}
+                
+                
+                
+        }
+    }
     
 }
 

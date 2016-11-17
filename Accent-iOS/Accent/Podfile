@@ -10,6 +10,8 @@ target 'Accent' do
   pod 'TextFieldEffects', '~> 1.3.0'
 
   pod 'Alamofire', '~> 4.0'
+
+  pod 'SCLAlertView'
 end
 
 post_install do |installer|

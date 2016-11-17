@@ -1,15 +1,18 @@
 PODS:
   - Alamofire (4.0.1)
+  - SCLAlertView (0.7.0)
   - TextFieldEffects (1.3.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
+  - SCLAlertView
   - TextFieldEffects (~> 1.3.0)
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   TextFieldEffects: ef594746f17997c813e07633f8ae5acaf9b04f27
 
-PODFILE CHECKSUM: 52eb4c931a44e77edaf766a75599a9395c87506c
+PODFILE CHECKSUM: 9e1c4edac1c04e67badd408eb7391fe644abb03c
 
 COCOAPODS: 1.0.1
