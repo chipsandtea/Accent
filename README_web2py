@@ -8,12 +8,12 @@ http://159.203.233.58:8000/accent/default/index
 =====Local requests=====
 
 GET request:
-http://159.203.233.58:8000/accent/default/api/acc/3
+http://159.203.233.58:8000/accent/default/api/login/email@email.com/password
 or
-curl http://159.203.233.58:8000/accent/default/api/acc/3
+curl http://159.203.233.58:8000/accent/default/api/login/email@email.com/password
 
 Example response:
-{"acc": {"firstname": "leslie", "lastname": "li", "id":3, "password": "1234", "email": "leslie@example.com"}}
+{"content": {"firstname": "agadberr", "lastname": "agadberr", "id": 11, "password": "password", "email": "email@email.com"}, "status": "success"}
 
 POST request:
 curl -d "firstname=hi&lastname=hello&password=12345&email=hello@gmail.com" http://159.203.233.58:8000/accent/default/api/acc
@@ -24,18 +24,20 @@ Example response:
 =====Server requests==============
 
 GET request:
-http://159.203.233.58/accent/default/api/acc/1
+http://159.203.233.58/accent/default/api/login/email@email.com/password
 or
-curl http://159.203.233.58/accent/default/api/acc/1
+curl http://159.203.233.58/accent/default/api/login/email@email.com/password
 
 Example response:
-{"acc": {"firstname": "leslie", "lastname": "li", "id": 1, "password": "123", "email": "leslie@example.com"}}
+{"content": {"firstname": "agadberr", "lastname": "agadberr", "id": 11, "password": "password", "email": "email@email.com"}, "status": "success"}
 
 POST request:
 curl -d "firstname=hi&lastname=hello&password=12345&email=hello@gmail.com" http://159.203.233.58/accent/default/api/acc
 
 Example response:
 {"acc": {"errors": {}, "id": 1}, "status": "success"}
+
+========= SQlite ============
 
 View database:
 sqlite3 storage.sqlite
