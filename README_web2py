@@ -38,16 +38,53 @@ Example success response:
 {"acc": {"errors": {}, "id": 3}, "status": success"}
 
 Example failure response:
-TO DO: fill in
+The terminal will give a internal error with a bunch of text, but if you go find the error you get:
+INFO:accent:====> Request: 'POST' '/accent/default/api/acc' ['acc'] <Storage {'emai': 'hello@gmail.com', 'latname': 'hello', 'firstnme': 'hi', 'assword': '12345'}>
+ERROR:web2py:Traceback (most recent call last):
+  File "/home/jliou/web2py/gluon/restricted.py", line 227, in restricted
+    exec ccode in environment
+  File "/home/jliou/web2py/applications/accent/controllers/default.py", line 133, in <module>
+  File "/home/jliou/web2py/gluon/globals.py", line 417, in <lambda>
+    self._caller = lambda f: f()
+  File "/home/jliou/web2py/gluon/globals.py", line 380, in f
+    res = rest_action(*request.args, **request.vars)
+  File "/home/jliou/web2py/applications/accent/controllers/default.py", line 70, in POST
+    resp = dict(status = 'success',acc = db.acc.validate_and_insert(**fields))
+  File "/home/jliou/web2py/gluon/packages/dal/pydal/objects.py", line 751, in validate_and_insert
+    response.id = self.insert(**new_fields)
+  File "/home/jliou/web2py/gluon/packages/dal/pydal/objects.py", line 726, in insert
+    ret = self._db._adapter.insert(self, self._listify(fields))
+  File "/home/jliou/web2py/gluon/packages/dal/pydal/objects.py", line 641, in _listify
+    'Field %s does not belong to the table' % name)
+SyntaxError: Field assword does not belong to the table
 
 POST request:
 curl -d "speech=blahblah&email=hello@gmail.com" http://159.203.233.58:8000/accent/default/api/sentence
 
 Example success response:
-TO DO: fill in
+{"content": {"corrected": "sample corrected sentence", "id": 7, "speech": "blahblah", "email": "hello@gmail.com"}, "status": "success"}
 
 Example failure response:
-TO DO: fill in
+The terminal will give an internal error, but if you look up the error it is:
+INFO:accent:====> Request: 'POST' '/accent/default/api/sentence' ['sentence'] <Storage {'speeh': 'blahblah', 'email': 'hello@gmail.com'}>
+ERROR:web2py:Traceback (most recent call last):
+  File "/home/jliou/web2py/gluon/restricted.py", line 227, in restricted
+    exec ccode in environment
+  File "/home/jliou/web2py/applications/accent/controllers/default.py", line 133, in <module>
+  File "/home/jliou/web2py/gluon/globals.py", line 417, in <lambda>
+    self._caller = lambda f: f()
+  File "/home/jliou/web2py/gluon/globals.py", line 380, in f
+    res = rest_action(*request.args, **request.vars)
+  File "/home/jliou/web2py/applications/accent/controllers/default.py", line 84, in POST
+    row = db.sentence.validate_and_insert(**fields)
+  File "/home/jliou/web2py/gluon/packages/dal/pydal/objects.py", line 751, in validate_and_insert
+    response.id = self.insert(**new_fields)
+  File "/home/jliou/web2py/gluon/packages/dal/pydal/objects.py", line 726, in insert
+    ret = self._db._adapter.insert(self, self._listify(fields))
+  File "/home/jliou/web2py/gluon/packages/dal/pydal/objects.py", line 641, in _listify
+    'Field %s does not belong to the table' % name)
+SyntaxError: Field speeh does not belong to the table
+
 =====Server requests==============
 
 GET request:
