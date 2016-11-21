@@ -62,13 +62,10 @@ def api():
 
             return response.json(resp)
 
-	#=========test=========================
-        elif tablename == 'test':
-	    return response.json(dict(status = 'success', test = demoCall()))
         #========corecting input ======================
 	elif tablename == 'sentence':
 	    #TODO: add call to correct input
-	    fields['corrected'] = 'sample corrected sentence'
+	    fields['corrected'] = demoCall(fields['speech'])
 	    #return row after inserting
 	    row = db.sentence.validate_and_insert(**fields)
 	    rid = row.id
