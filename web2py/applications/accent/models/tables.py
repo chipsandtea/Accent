@@ -15,12 +15,7 @@ db.define_table('acc',
                 Field('password', writable=True),
                 Field('email', writable=True))
 
-#db.define_table('pet',
- #               Field('ownedby', db.person),
-  #              Field('name'),
-   #             Field('info'))
-
-# I don't want to display the user email by default in all forms.
-
-# after defining tables, uncomment below to enable auditing
-# auth.enable_record_versioning(db)
+db.define_table('sentence',
+		Field('email', writable=True),
+		Field('speech', writable=True),
+		Field('corrected', writable=True))

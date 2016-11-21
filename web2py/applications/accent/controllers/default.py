@@ -30,26 +30,34 @@ def api():
     def GET(*args, **vars):
 	status = None
 	error = None
-	#pattern matching for login
+	#pattern matching for login and getting sentences
 	patterns = [
-	   "/login/{acc.email}/{acc.password}"
+	   "/login/{acc.email}/{acc.password}",
+	   "/sentences/{sentence.email}/:field"
 	]
 	#maps request args from URL to a db query    	
 	parser = db.parse_as_rest(patterns, args, vars)
+	print parser
 	#successfully parsed the request
         if parser.status == 200:
 	    #returns rows from db query
 	    resp = parser.response
+	    print resp
 	    #no rows returned, email and pw did not match
 	    if len(resp) == 0:
-	        status = 'failure'
-		error = 'Email and password did not match'
+		status = 'failure'
+		if args[0] == 'login':
+	 	    error = 'Email and password did not match'
 		return response.json(dict(status = status, error = error))	
 	    #return a response with the queried content
 	    else:
 		status = 'success'
-		row = resp[0]	
-	    return response.json(dict(status = status, content = row))
+		
+		#row = resp[0]	
+	    return response.json(dict(status = status, content = resp))	
+	#raises 400 if no matching pattern 
+	elif parser.status == 404:
+	    return response.json(dict(status = 'failure', error = parser.error))
 	else:
 	    raise HTTP(400) 
     
@@ -68,10 +76,15 @@ def api():
 	#=========test=========================
         elif tablename == 'test':
 	    return response.json(dict(status = 'success', test = demoCall()))
-	
-	elif tablename == 'correct':
-	    return response.json(dict(status = 'success'))
-
+        #========corecting input ======================
+	elif tablename == 'sentence':
+	    #TODO: add call to correct input
+	    fields['corrected'] = 'sample corrected sentence'
+	    #return row after inserting
+	    row = db.sentence.validate_and_insert(**fields)
+	    rid = row.id
+	    resp = dict(status = 'success', content = db.sentence[rid])
+	    return response.json(resp)
 	#========invalid request===============
 	else:
 	    raise HTTP(400)
