@@ -1,4 +1,3 @@
-from datetime import date
-
-def demoCall():
-	print('== TEST CALL == ' + str(date.today()))
+# Parameters: string
+def demoCall(query):
+	return 'Your query is ' + str(query);
