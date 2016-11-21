@@ -34,9 +34,20 @@ the request fails to find any record(s):
 POST request:
 curl -d "firstname=hi&lastname=hello&password=12345&email=hello@gmail.com" http://159.203.233.58:8000/accent/default/api/acc
 
-Example response:
+Example success response:
 {"acc": {"errors": {}, "id": 3}, "status": success"}
 
+Example failure response:
+TO DO: fill in
+
+POST request:
+curl -d "speech=blahblah&email=hello@gmail.com" http://159.203.233.58:8000/accent/default/api/sentence
+
+Example success response:
+TO DO: fill in
+
+Example failure response:
+TO DO: fill in
 =====Server requests==============
 
 GET request:
