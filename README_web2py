@@ -7,14 +7,30 @@ http://159.203.233.58:8000/accent/default/index
 
 =====Local requests=====
 
-GET request:
+GET request for login:
 http://159.203.233.58:8000/accent/default/api/login/email@email.com/password
 or
 curl http://159.203.233.58:8000/accent/default/api/login/email@email.com/password
 
-Example response:
+Example success response:
 {"content": {"firstname": "agadberr", "lastname": "agadberr", "id": 11, "password": "password", "email": "email@email.com"}, "status": "success"}
 
+GET request for a user's sentences:
+http://159.203.233.58:8000/accent/default/api/sentences/hello@gmail.com/corrected
+http://159.203.233.58:8000/accent/default/api/sentences/hello@gmail.com/speech
+
+Example success response:
+{"content": [{"corrected": "sample corrected sentence"}, {"corrected": "sample corrected sentence"}], "status": "success"}
+
+{"content": [{"speech": "blahblah"}, {"speech": "blahblah"}], "status": "success"}
+
+Example failure response:
+In the case that the GET request matches no patterns:
+400 Bad request
+or 
+the request fails to find any record(s):
+{"status": "failure", "error": "no record found"}
+ 
 POST request:
 curl -d "firstname=hi&lastname=hello&password=12345&email=hello@gmail.com" http://159.203.233.58:8000/accent/default/api/acc
 
