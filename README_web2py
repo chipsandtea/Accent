@@ -46,7 +46,6 @@ SELECT * from 'table_name';
 Deleting from the database:
 delete from your_table;
 delete from sqlite_sequence where name='your_table';  (resets id for the table)
-
 ======Linux Daemon=============
 To access the web2py via the server it is running via 24/7:
 
