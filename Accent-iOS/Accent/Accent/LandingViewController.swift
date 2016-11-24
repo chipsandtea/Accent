@@ -10,6 +10,7 @@ import UIKit
 import TextFieldEffects
 import Alamofire
 import SCLAlertView
+import SwiftyJSON
 
 class LandingViewController: UIViewController {
 
@@ -41,9 +42,8 @@ class LandingViewController: UIViewController {
     }
 
     @IBAction func loginPressed(_ sender: AnyObject) {
-        let speechVC = self.storyboard?.instantiateViewController(withIdentifier: "SpeechVC") as! SpeechViewController
         
-        self.navigationController?.pushViewController(speechVC, animated: true)
+        self.processLogin()
     }
     
     @IBAction func displayRegisterView(_ sender: AnyObject) {
@@ -59,12 +59,47 @@ class LandingViewController: UIViewController {
         
         print(parameters)
         
-        Alamofire.request("http://159.203.233.58/accent/default/api/login", method: .post, parameters: parameters, encoding: URLEncoding.default)
-            .responseString { response in
+        var url = "http://159.203.233.58/accent/default/api/login/"
+        url += parameters["email"]!
+        url += "/"
+        url += parameters["password"]!
+        
+        print(url)
+        
+        Alamofire.request(url, method: .get, encoding: URLEncoding.default)
+            .responseJSON { response in
                 
                 print(response)
                 
-                SUCCESS: {"acc": {"errors": {}, "id": 15}, "status": "success"}
+                let json = JSON(data: response.data!)
+                
+                if (json["error"].stringValue != "") {
+                    SCLAlertView().showError("Whoops!", subTitle: json["error"].stringValue)
+
+                } else {
+                
+                    let user = User(
+                        firstname:  json["content"][0]["firstname"].stringValue,
+                        lastname:   json["content"][0]["lastname"].stringValue,
+                        id:         json["content"][0]["id"].stringValue,
+                        password:   json["content"][0]["password"].stringValue,
+                        email:      json["content"][0]["email"].stringValue
+                    )
+                    
+                    
+                    let correctionVC = self.storyboard?.instantiateViewController(withIdentifier: "CorrectionVC") as! CorrectionViewController
+                    print(user)
+                    correctionVC.user = user
+                    
+                    self.navigationController?.pushViewController(correctionVC, animated: true)
+                }
+             
+//                if (response.result.isSuccess) {
+//                    print("BIG SUCCESS")
+//                } else {
+//                    print("BIG ERROR")
+//                }
+                // SUCCESS: {"acc": {"errors": {}, "id": 15}, "status": "success"}
                 
                 
                 

@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		AB1D14A294557E702340B8EB /* Pods_Accent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31C578CD010BC02AAA954F1 /* Pods_Accent.framework */; };
-		D11D2C6E1DC1B17C00028E13 /* SpeechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11D2C6D1DC1B17C00028E13 /* SpeechViewController.swift */; };
+		D11D2C6E1DC1B17C00028E13 /* CorrectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11D2C6D1DC1B17C00028E13 /* CorrectionViewController.swift */; };
 		D13D06BA1DC1A12D00652C86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D06B91DC1A12D00652C86 /* AppDelegate.swift */; };
 		D13D06BC1DC1A12D00652C86 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13D06BB1DC1A12D00652C86 /* LandingViewController.swift */; };
 		D13D06BF1DC1A12D00652C86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D13D06BD1DC1A12D00652C86 /* Main.storyboard */; };
 		D13D06C11DC1A12D00652C86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D13D06C01DC1A12D00652C86 /* Assets.xcassets */; };
 		D13D06C41DC1A12D00652C86 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D13D06C21DC1A12D00652C86 /* LaunchScreen.storyboard */; };
 		D15531E51DC1B5C50050A65F /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15531E41DC1B5C50050A65F /* CircleButton.swift */; };
+		D174B1B51DE6CAE400CE3EF8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174B1B41DE6CAE400CE3EF8 /* User.swift */; };
 		D1DC94FA1DC9580E00B4C68D /* LandingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC94F91DC9580E00B4C68D /* LandingNavigationViewController.swift */; };
 		D1EB4C251DCA56CE00C6A049 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EB4C241DCA56CE00C6A049 /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
@@ -22,7 +23,7 @@
 /* Begin PBXFileReference section */
 		33BA1C255281E03DC06314E4 /* Pods-Accent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Accent/Pods-Accent.debug.xcconfig"; sourceTree = "<group>"; };
 		7661D9B4CDEC096AEC7E32CF /* Pods-Accent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accent.release.xcconfig"; path = "Pods/Target Support Files/Pods-Accent/Pods-Accent.release.xcconfig"; sourceTree = "<group>"; };
-		D11D2C6D1DC1B17C00028E13 /* SpeechViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechViewController.swift; sourceTree = "<group>"; };
+		D11D2C6D1DC1B17C00028E13 /* CorrectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorrectionViewController.swift; sourceTree = "<group>"; };
 		D13D06B61DC1A12D00652C86 /* Accent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13D06B91DC1A12D00652C86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D13D06BB1DC1A12D00652C86 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
@@ -31,6 +32,7 @@
 		D13D06C31DC1A12D00652C86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D13D06C51DC1A12D00652C86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D15531E41DC1B5C50050A65F /* CircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
+		D174B1B41DE6CAE400CE3EF8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D1DC94F91DC9580E00B4C68D /* LandingNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingNavigationViewController.swift; sourceTree = "<group>"; };
 		D1EB4C241DCA56CE00C6A049 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		D31C578CD010BC02AAA954F1 /* Pods_Accent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Accent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +83,7 @@
 				D15531E31DC1B5950050A65F /* Controllers */,
 				D1DC94F81DC9521800B4C68D /* NavigationControllers */,
 				D15531E21DC1B58C0050A65F /* Views */,
+				D174B1B61DE6CD8B00CE3EF8 /* Models */,
 				D13D06B91DC1A12D00652C86 /* AppDelegate.swift */,
 				D13D06BD1DC1A12D00652C86 /* Main.storyboard */,
 				D13D06C01DC1A12D00652C86 /* Assets.xcassets */,
@@ -103,9 +106,17 @@
 			children = (
 				D13D06BB1DC1A12D00652C86 /* LandingViewController.swift */,
 				D1EB4C241DCA56CE00C6A049 /* RegisterViewController.swift */,
-				D11D2C6D1DC1B17C00028E13 /* SpeechViewController.swift */,
+				D11D2C6D1DC1B17C00028E13 /* CorrectionViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		D174B1B61DE6CD8B00CE3EF8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D174B1B41DE6CAE400CE3EF8 /* User.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		D1DC94F81DC9521800B4C68D /* NavigationControllers */ = {
@@ -250,10 +261,11 @@
 			files = (
 				D1DC94FA1DC9580E00B4C68D /* LandingNavigationViewController.swift in Sources */,
 				D13D06BC1DC1A12D00652C86 /* LandingViewController.swift in Sources */,
-				D11D2C6E1DC1B17C00028E13 /* SpeechViewController.swift in Sources */,
+				D11D2C6E1DC1B17C00028E13 /* CorrectionViewController.swift in Sources */,
 				D1EB4C251DCA56CE00C6A049 /* RegisterViewController.swift in Sources */,
 				D13D06BA1DC1A12D00652C86 /* AppDelegate.swift in Sources */,
 				D15531E51DC1B5C50050A65F /* CircleButton.swift in Sources */,
+				D174B1B51DE6CAE400CE3EF8 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

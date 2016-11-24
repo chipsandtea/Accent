@@ -12,6 +12,8 @@ target 'Accent' do
   pod 'Alamofire', '~> 4.0'
 
   pod 'SCLAlertView'
+
+  pod 'SwiftyJSON'
 end
 
 post_install do |installer|
