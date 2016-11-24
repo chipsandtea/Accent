@@ -61,9 +61,9 @@ def get_ginger_result(text):
     return(result)
 
 
-def main():
+def main(string):
     """main function"""
-    original_text = " ".join(sys.argv[1:])
+    original_text = string
     if len(original_text) > 600:
         print("You can't check more than 600 characters at a time.")
         quit()
