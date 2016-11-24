@@ -1,10 +1,11 @@
 The web2py is installed inside my folder in the server. To start web2py from my server:
 1. navigate to /home/jliou/web2py
-2. type “python web2py.py -—ip 159.203.233.58 -e”
+2. type “python web2py.py --ip 159.203.233.58 -e”
 
 This will get web2py up and running and you can access on a web browser:
 http://159.203.233.58:8000/accent/default/index
 
+Note: For server requests, disregard port 8000 when typing requests. (Example: http://159.203.233.58/accent/default/api/login/email@email.com/password)
 =====Local requests=====
 
 GET request for login:
@@ -16,20 +17,13 @@ Example success response:
 {"content": {"firstname": "agadberr", "lastname": "agadberr", "id": 11, "password": "password", "email": "email@email.com"}, "status": "success"}
 
 GET request for a user's sentences:
-http://159.203.233.58:8000/accent/default/api/sentences/hello@gmail.com/corrected
-http://159.203.233.58:8000/accent/default/api/sentences/hello@gmail.com/speech
+curl http://159.203.233.58:8000/accent/default/api/hello@gmail.com/get
 
 Example success response:
-{"content": [{"corrected": "sample corrected sentence"}, {"corrected": "sample corrected sentence"}], "status": "success"}
-
-{"content": [{"speech": "blahblah"}, {"speech": "blahblah"}], "status": "success"}
+{"content": [{"corrected": "sample corrected sentence", "id": 1, "speech": "blahblah", "email": "hello@gmail.com"}, {"corrected": "sample corrected sentence", "id": 2, "speech": "aaa", "email": "hello@gmail.com"}, {"corrected": "Your query is test demo call", "id": 3, "speech": "test demo call", "email": "hello@gmail.com"}], "status": "success"}
 
 Example failure response:
-In the case that the GET request matches no patterns:
-400 Bad request
-or 
-the request fails to find any record(s):
-{"status": "failure", "error": "no record found"}
+{"status": "failure", "error": null}
  
 POST request:
 curl -d "firstname=hi&lastname=hello&password=12345&email=hello@gmail.com" http://159.203.233.58:8000/accent/default/api/acc
@@ -38,68 +32,13 @@ Example success response:
 {"acc": {"errors": {}, "id": 3}, "status": success"}
 
 Example failure response:
-The terminal will give a internal error with a bunch of text, but if you go find the error you get:
-INFO:accent:====> Request: 'POST' '/accent/default/api/acc' ['acc'] <Storage {'emai': 'hello@gmail.com', 'latname': 'hello', 'firstnme': 'hi', 'assword': '12345'}>
-ERROR:web2py:Traceback (most recent call last):
-  File "/home/jliou/web2py/gluon/restricted.py", line 227, in restricted
-    exec ccode in environment
-  File "/home/jliou/web2py/applications/accent/controllers/default.py", line 133, in <module>
-  File "/home/jliou/web2py/gluon/globals.py", line 417, in <lambda>
-    self._caller = lambda f: f()
-  File "/home/jliou/web2py/gluon/globals.py", line 380, in f
-    res = rest_action(*request.args, **request.vars)
-  File "/home/jliou/web2py/applications/accent/controllers/default.py", line 70, in POST
-    resp = dict(status = 'success',acc = db.acc.validate_and_insert(**fields))
-  File "/home/jliou/web2py/gluon/packages/dal/pydal/objects.py", line 751, in validate_and_insert
-    response.id = self.insert(**new_fields)
-  File "/home/jliou/web2py/gluon/packages/dal/pydal/objects.py", line 726, in insert
-    ret = self._db._adapter.insert(self, self._listify(fields))
-  File "/home/jliou/web2py/gluon/packages/dal/pydal/objects.py", line 641, in _listify
-    'Field %s does not belong to the table' % name)
-SyntaxError: Field assword does not belong to the table
+{"status": "failure", "error": "email already exists"}
 
 POST request:
 curl -d "speech=blahblah&email=hello@gmail.com" http://159.203.233.58:8000/accent/default/api/sentence
 
 Example success response:
 {"content": {"corrected": "sample corrected sentence", "id": 7, "speech": "blahblah", "email": "hello@gmail.com"}, "status": "success"}
-
-Example failure response:
-The terminal will give an internal error, but if you look up the error it is:
-INFO:accent:====> Request: 'POST' '/accent/default/api/sentence' ['sentence'] <Storage {'speeh': 'blahblah', 'email': 'hello@gmail.com'}>
-ERROR:web2py:Traceback (most recent call last):
-  File "/home/jliou/web2py/gluon/restricted.py", line 227, in restricted
-    exec ccode in environment
-  File "/home/jliou/web2py/applications/accent/controllers/default.py", line 133, in <module>
-  File "/home/jliou/web2py/gluon/globals.py", line 417, in <lambda>
-    self._caller = lambda f: f()
-  File "/home/jliou/web2py/gluon/globals.py", line 380, in f
-    res = rest_action(*request.args, **request.vars)
-  File "/home/jliou/web2py/applications/accent/controllers/default.py", line 84, in POST
-    row = db.sentence.validate_and_insert(**fields)
-  File "/home/jliou/web2py/gluon/packages/dal/pydal/objects.py", line 751, in validate_and_insert
-    response.id = self.insert(**new_fields)
-  File "/home/jliou/web2py/gluon/packages/dal/pydal/objects.py", line 726, in insert
-    ret = self._db._adapter.insert(self, self._listify(fields))
-  File "/home/jliou/web2py/gluon/packages/dal/pydal/objects.py", line 641, in _listify
-    'Field %s does not belong to the table' % name)
-SyntaxError: Field speeh does not belong to the table
-
-=====Server requests==============
-
-GET request:
-http://159.203.233.58/accent/default/api/login/email@email.com/password
-or
-curl http://159.203.233.58/accent/default/api/login/email@email.com/password
-
-Example response:
-{"content": {"firstname": "agadberr", "lastname": "agadberr", "id": 11, "password": "password", "email": "email@email.com"}, "status": "success"}
-
-POST request:
-curl -d "firstname=hi&lastname=hello&password=12345&email=hello@gmail.com" http://159.203.233.58/accent/default/api/acc
-
-Example response:
-{"acc": {"errors": {}, "id": 1}, "status": "success"}
 
 ========= SQlite ============
 
@@ -110,7 +49,9 @@ SELECT * from 'table_name';
 Deleting from the database:
 delete from your_table;
 delete from sqlite_sequence where name='your_table';  (resets id for the table)
+
 ======Linux Daemon=============
+
 To access the web2py via the server it is running via 24/7:
 
 The url is: 159.203.233.58, it should redirect you to http://159.203.233.58/welcome/default/index

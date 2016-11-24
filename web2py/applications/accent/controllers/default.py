@@ -11,15 +11,7 @@ from test_script import demoCall
 
 #@auth.requires_login()
 def index():
-    """
-    This is your main controller.
-    """
-    # I am creating a bogus list here, just to have some divs appear in the
-    # view.  You need to read at most 20 posts from the database, in order of
-    # most recent first, and you need to return that list here.
-    # Note that posts is NOT a list of strings in your actual code; it is
-    # what you get from a db(...).select(...).
-    posts = ['banana', 'pear', 'eggplant']
+    posts = ['temp index']
     return dict(posts=posts)
 
 
@@ -33,11 +25,10 @@ def api():
 	#pattern matching for login and getting sentences
 	patterns = [
 	   "/login/{acc.email}/{acc.password}",
-	   "/sentences/{sentence.email}/:field"
+	   "/{sentence.email}/get"
 	]
 	#maps request args from URL to a db query    	
 	parser = db.parse_as_rest(patterns, args, vars)
-	print parser
 	#successfully parsed the request
         if parser.status == 200:
 	    #returns rows from db query
@@ -51,9 +42,7 @@ def api():
 		return response.json(dict(status = status, error = error))	
 	    #return a response with the queried content
 	    else:
-		status = 'success'
-		
-		#row = resp[0]	
+		status = 'success'	
 	    return response.json(dict(status = status, content = resp))	
 	#raises 400 if no matching pattern 
 	elif parser.status == 404:
@@ -73,13 +62,10 @@ def api():
 
             return response.json(resp)
 
-	#=========test=========================
-        elif tablename == 'test':
-	    return response.json(dict(status = 'success', test = demoCall()))
         #========corecting input ======================
 	elif tablename == 'sentence':
 	    #TODO: add call to correct input
-	    fields['corrected'] = 'sample corrected sentence'
+	    fields['corrected'] = demoCall(fields['speech'])
 	    #return row after inserting
 	    row = db.sentence.validate_and_insert(**fields)
 	    rid = row.id
