@@ -7,7 +7,7 @@
 # - user is required for authentication and authorization
 # - download is for downloading files uploaded in the db (does streaming)
 # -------------------------------------------------------------------------
-from test_script import demoCall
+import ginger2
 
 #@auth.requires_login()
 def index():
@@ -64,8 +64,7 @@ def api():
 
         #========corecting input ======================
 	elif tablename == 'sentence':
-	    #TODO: add call to correct input
-	    fields['corrected'] = demoCall(fields['speech'])
+	    fields['corrected'] = ginger2.main(fields['speech'])
 	    #return row after inserting
 	    row = db.sentence.validate_and_insert(**fields)
 	    rid = row.id
