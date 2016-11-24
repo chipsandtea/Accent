@@ -1,12 +1,11 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Simple grammar checker
 
 This grammar checker will fix grammar mistakes using Ginger.
 
 Code placeholder for NLP functionality: https://github.com/zoncoen/python-ginger
-Credit to zoncoen
+Credit to zoncoen for unofficial API Ginger querying script.
 """
 
 import sys
@@ -71,9 +70,10 @@ def main():
     fixed_text = original_text
     results = get_ginger_result(original_text)
 
-    # Correct grammar
+    # Correct grammar case.
     if(not results["LightGingerTheTextResult"]):
-        print("Good English :)")
+        # print("No problems!")
+        # No discernable issues.
         quit()
 
     # Incorrect grammar
