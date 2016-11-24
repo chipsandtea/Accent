@@ -1,9 +1,9 @@
-import http.client, urllib.request, urllib.parse, 
+import http.client, urllib.request, urllib.parse
 import urllib.error, base64, json, nltk
-from nltk.tokenize import RegexpTokenizer
+from nltk import word_tokenize
 from nltk.util import ngrams
 
-def queryAPI(body):
+def queryAPI(body_dict):
     headers = {
         # Request headers
         'Content-Type': 'application/json',
@@ -17,8 +17,8 @@ def queryAPI(body):
 
     try:
         conn = http.client.HTTPSConnection('api.projectoxford.ai')
-        dic = {"queries":["this","is","this is"]}
-        body = json.dumps(dic)
+        
+        body = json.dumps(body_dict)
         conn.request("POST", "/text/weblm/v1.0/calculateJointProbability?%s" % params, body, headers)
         response = conn.getresponse()
         data = response.read()
@@ -29,14 +29,21 @@ def queryAPI(body):
 
 
 def extractTrigrams(raw):
-    tokenizer = RegexpTokenizer(r'\w+')
-    tokens = tokenizer.tokenize(raw)
-    trigrams = ngrams(tokens, 3)
-    print(type(trigrams))
-    print(trigrams)
-    return trigrams
+    tokens = word_tokenize(raw)
+    trigramGenerator = ngrams(tokens, 3)
+    trigrams = []
+    [trigrams.append(gram) for gram in trigramGenerator]
+    body = dict()
+    body['queries'] = []
+    for gram in trigrams:
+        body['queries'].append(' '.join(gram))
+
+    print(body['queries'])
+    return body
+
 
 def main(raw):
+    queryAPI(extractTrigrams(raw))
 
 if __name__ == '__main__':
     main()

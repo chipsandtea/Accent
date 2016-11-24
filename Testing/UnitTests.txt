@@ -10,3 +10,8 @@ Grammar Corrections
 	* get_ginger_result(text) - queries the Ginger API and parses the result into a dictionary from the JSON return. Testing was conducted on the integrity of the dictionary and if the JSON data was deserialized properly.
 
 	* main(string) - brings the previous two functions together, extracts the necessary data, and constructs the "fixed string". Testing was conducted extensively on the data and control flow between the previous two modules, as well as the accuracy of the output.
+
+	== Actual NLP processes == 
+	Equivalence Classes: prototyping grammar corrections
+	Modules: ngram.py
+	* ngram.py - computes the joint probability of trigrams
