@@ -137,8 +137,9 @@ def main():
             color_gap += gap
             fixed_gap += to_index-from_index-len(suggest)
 
-    print("from: " + original_text)
-    print("to:   " + fixed_text)
+    #print("from: " + original_text)
+    #print("to:   " + fixed_text)
+    return fixed_text
 
 
 if __name__ == '__main__':
