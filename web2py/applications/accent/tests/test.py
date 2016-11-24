@@ -1,6 +1,7 @@
 import unittest
 
 from gluon.globals import Request
+from gluon.storage import Storage
 
 execfile("applications/accent/controllers/default.py", globals())
 
@@ -10,15 +11,18 @@ execfile("applications/accent/controllers/default.py", globals())
 
 class TestListActiveGames(unittest.TestCase):
     def setUp(self):
-	request = Request()
+	dc = dict()
+	strg = Storage(dc)
+	request = Request(strg)
     def testListActiveGames(self):
         # Set variables for the test function
 	request.env.request_method = "POST"
-        request.post_vars["firstname"] = "leslie"
+        request.args = ['acc', '1.json']
+	request.post_vars["firstname"] = "leslie"
 	request.post_vars["lastname"] = "li"
 	request.post_vars["password"] = "1234"
 	request.post_vars["email"] = "test@test.com"
-
+	request.is_restful = True
 	response = api()
         self.assertEquals('success', response.status)
 

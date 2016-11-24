@@ -55,6 +55,7 @@ def api():
         if tablename == 'acc':
             #check if acc exists? look up validate_and_insert return value
 	    existing = db(db.acc.email == request.post_vars.email).select().first()
+	    print tablename
             if existing is None:
 		resp = dict(status = 'success',acc = db.acc.validate_and_insert(**fields))
 	    else: 
