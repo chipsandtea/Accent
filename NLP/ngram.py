@@ -2,7 +2,7 @@ import http.client, urllib.request, urllib.parse
 import urllib.error, base64, json, nltk
 from nltk import word_tokenize
 from nltk.util import ngrams
-import string
+import string, re
 
 def queryAPI(body_dict):
     headers = {
@@ -63,9 +63,19 @@ def constructBody(trigrams):
     print(body['queries'])
     return body
 
+def sanitize(raw):
+    remove_regex = string.punctuation
+    remove_regex = remove_regex.replace("'","")
+    remove_regex = remove_regex.replace("-","")
+    pattern = r"[{}]".format(remove_regex)
+    raw = raw.lower()
+    sanitized = re.sub(pattern,'',raw)
+    return sanitized
+
+
 def main(raw):
-    #raw = raw.translate(None, string.punctuation)
-    trigram_list = extractTrigrams(raw.lower())
+    sanitized_input = sanitize(raw)
+    trigram_list = extractTrigrams(sanitized_input)
     body = constructBody(trigram_list)
     raw_output = queryAPI(body)
     extractProbabilities(raw_output)
