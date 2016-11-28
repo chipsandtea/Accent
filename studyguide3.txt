@@ -34,4 +34,29 @@ CMPS115 - Study Guide 3
 			- Can load be managed for indefinite amount of time?
 			- What is the load on expected bottlenecks?
 			- Are there unexpected bottle necks?
-			
+		- Stress: Test sytem behavior when defined limits are exceeded
+			- What is the perofrmance when the system is overloaded?
+				- Thrashing
+				- Superlinear increase in response time
+				- System grinds to a halt
+			- Does the system return to normal behavior when no longer overloaded?
+				- How long does that take?
+5. Static QA methods
+	1. Types of reviews: Pair Programming -> Walkthrough -> Review -> Inspection
+		- Pair Programming: Engineers work in pairs to develop design/code
+		- Walkthrough: Developer walks team members through a design/section of code. Team members ask questions and comment on style, defects, conformance to developemtn standards, etc.
+		- Review: Semi-formal check of written document by 'external' (to team) expert
+		- Inspection: Formal (highly structured) audit using checklisits and reading techniques.
+	2. Cost/Benefit
+		- More than 50% of defects discovered are found using inspection
+		- Up to 90%, typically 50%-75%
+		- Relation of error fixing costs based on inspection vs testing
+			- Between 1:10 and 1:30
+		- Expensive, and using time of several (usually senior) developers
+	3. Why 'static' (as opposed to 'dynamic')?
+		- Dynamic methods ('testing') less thorough.
+		- Testing takes samples of system behavior
+			- Exhaustive testing typically not possible.
+			- Testing can only prove the presence of faults, not their absence.
+=== UNIT TEST CONCEPTS AND PATTERNS ===
+
