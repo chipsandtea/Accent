@@ -16,3 +16,22 @@ CMPS115 - Study Guide 3
 			- e.g. statements, execution paths, conditions, classes, packages, etc.
 		- Coverage criteria: for White box testing defined via control flow graph.
 			- Definition of intermediate language
+3. Black box test
+	1. Focus/Purpose: Did we build the right system? (VALIDATION)
+		- Tests designed to check user-observable behavior against requirements
+		- Test coverage: relative to possible inputs and outputs
+			- total possible number of inputs/outputs
+		- Ignores internal system structure (architecture etc)
+4. Types of tests
+	1. Unit Tests: check function of a single module (class, object) by observing processing of test data. Done by developer.
+	2. Integration Tests: checks the interaction between already unit tested components.
+	3. System test: is the final test in the development environment. 
+	4. User Acceptance: final test in the customer's production environment directed by customer; basis for accepting or rejecting product delivery.
+	5. Performance Tests
+		- Load: Tested system/component for reliability and conformance with specification in at the boundary of valid range.
+			- Cope with required number of users?
+			- System response within guaranteed response times?
+			- Can load be managed for indefinite amount of time?
+			- What is the load on expected bottlenecks?
+			- Are there unexpected bottle necks?
+			
