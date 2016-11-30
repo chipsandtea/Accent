@@ -4,81 +4,89 @@ from nltk import word_tokenize
 from nltk.util import ngrams
 import string, re
 
-def queryAPI(body_dict):
-    headers = {
-        # Request headers
-        'Content-Type': 'application/json',
-        'Ocp-Apim-Subscription-Key': '9292de8c83df4531861ef48c725f9256',
-    }
+# Queries the Microsoft LM API for joint probabilities of trigrams.
+class ngrammer:
+    def __init__(self):
+        self.hello = "greetings"
+    def queryAPI(self, body_dict):
+        headers = {
+            # Request headers
+            'Content-Type': 'application/json',
+            'Ocp-Apim-Subscription-Key': '9292de8c83df4531861ef48c725f9256',
+        }
 
-    params = urllib.parse.urlencode({
-        # Request parameters
-        'model': 'query',
-    })
+        params = urllib.parse.urlencode({
+            # Request parameters
+            'model': 'query',
+        })
 
-    try:
-        conn = http.client.HTTPSConnection('api.projectoxford.ai')
+        try:
+            conn = http.client.HTTPSConnection('api.projectoxford.ai')
+            
+            body = json.dumps(body_dict)
+            conn.request("POST", "/text/weblm/v1.0/calculateJointProbability?%s" % params, body, headers)
+            response = conn.getresponse()
+            data = response.read()
+            #print(data)
+            conn.close()
+        except Exception as e:
+            print("[Errno {0}] {1}".format(e.errno, e.strerror))
+        return data
+
+    def extractProbabilities(self, unserialized_data):
+        data = json.loads(unserialized_data.decode('utf-8'))
+        trigram_probabilities = []
+        for trigram_result in data['results']:
+            print('Trigram: ' + trigram_result['words'] + ' | ' + 'Probability: ' + str(trigram_result['probability']))
+            trigram_probabilities.append((trigram_result['words'], trigram_result['probability']))
+        return trigram_probabilities
+
+    # Extract and returns the trigrams given a sanitized input string.
+    def extractTrigrams(self, input_string):
+        print('Raw: ' + input_string)
+        tokens = word_tokenize(input_string)
+        print('Tokens: ', end = '')
+        print(tokens)
+        numOfTokens = len(tokens)
+        if numOfTokens == 1:
+            print('1')
+        elif numOfTokens == 2:
+            trigramGenerator = ngrams(tokens,2)
+        elif numOfTokens == 3:
+            trigramGenerator = ngrams(tokens, 3)
+        else:
+            trigramGenerator = ngrams(tokens, 4)
+        trigrams = set()
+        [trigrams.add(gram) for gram in trigramGenerator]
+        print(trigrams)
+        return trigrams
         
-        body = json.dumps(body_dict)
-        conn.request("POST", "/text/weblm/v1.0/calculateJointProbability?%s" % params, body, headers)
-        response = conn.getresponse()
-        data = response.read()
-        #print(data)
-        conn.close()
-    except Exception as e:
-        print("[Errno {0}] {1}".format(e.errno, e.strerror))
-    return data
 
-def extractProbabilities(unserialized_data):
-    data = json.loads(unserialized_data.decode('utf-8'))
-    for trigram_result in data['results']:
-        print('Trigram: ' + trigram_result['words'] + ' | ' + 'Probability: ' + str(trigram_result['probability']))
+    # Constructs and returns a dictionary obj that makes up the body of the API Query.
+    def constructBody(self, trigrams):
+        body = dict()
+        body['queries'] = []
+        for gram in trigrams:
+            body['queries'].append(' '.join(list(gram)))
 
+        #print(body['queries'])
+        return body
 
-def extractTrigrams(input_string):
-    print('Raw: ' + input_string)
-    tokens = word_tokenize(input_string)
-    print('Tokens: ', end = '')
-    print(tokens)
-    numOfTokens = len(tokens)
-    if numOfTokens == 1:
-        print('1')
-    elif numOfTokens == 2:
-        trigramGenerator = ngrams(tokens,2)
-    else:
-        trigramGenerator = ngrams(tokens, 3)
-    trigrams = set()
-    [trigrams.add(gram) for gram in trigramGenerator]
-    print(trigrams)
-    return trigrams
-    
-
-# Constructs and returns a dictionary obj that makes up the body of the API Query.
-def constructBody(trigrams):
-    body = dict()
-    body['queries'] = []
-    for gram in trigrams:
-        body['queries'].append(' '.join(list(gram)))
-
-    print(body['queries'])
-    return body
-
-def sanitize(raw):
-    remove_regex = string.punctuation
-    remove_regex = remove_regex.replace("'","")
-    remove_regex = remove_regex.replace("-","")
-    pattern = r"[{}]".format(remove_regex)
-    raw = raw.lower()
-    sanitized = re.sub(pattern,'',raw)
-    return sanitized
+    # Sanitizes the input by removing punctuation other than apostrophes and hyphens.
+    def sanitize(self, raw):
+        remove_regex = string.punctuation
+        remove_regex = remove_regex.replace("'","")
+        remove_regex = remove_regex.replace("-","")
+        pattern = r"[{}]".format(remove_regex)
+        raw = raw.lower()
+        sanitized = re.sub(pattern,'',raw)
+        return sanitized
 
 
-def main(raw):
-    sanitized_input = sanitize(raw)
-    trigram_list = extractTrigrams(sanitized_input)
-    body = constructBody(trigram_list)
-    raw_output = queryAPI(body)
-    extractProbabilities(raw_output)
-
-if __name__ == '__main__':
-    main()
+    def probabilities(self, raw):
+        sanitized_input = self.sanitize(raw)
+        trigram_list = self.extractTrigrams(sanitized_input)
+        body = self.constructBody(trigram_list)
+        raw_output = self.queryAPI(body)
+        trigram_probabilities = self.extractProbabilities(raw_output)
+        return(trigram_probabilities)
