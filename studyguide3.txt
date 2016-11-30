@@ -1,0 +1,62 @@
+CMPS115 - Study Guide 3
+
+=== TESTING CONCEPTS ===
+
+1. Basic concepts
+	1. Failure: software fails to behave as specified
+		- failure is an event during software execution
+	2. Fault (defect, 'bug'): a problem in the structure, form, or representation of the software product that can cause a failure.
+		- fault is a state
+	3. Error (Mistake): human action or misjudgment that causes a defect.
+	- Errors -> Faults -> Failures
+2. White/Glass box tests
+	2. Focus/Purpose: Did we build the system right? (VERIFICATION)
+		- Tests designed to check system-internal behavior
+		- Test coverage: relative to system components (at various levels)
+			- e.g. statements, execution paths, conditions, classes, packages, etc.
+		- Coverage criteria: for White box testing defined via control flow graph.
+			- Definition of intermediate language
+3. Black box test
+	1. Focus/Purpose: Did we build the right system? (VALIDATION)
+		- Tests designed to check user-observable behavior against requirements
+		- Test coverage: relative to possible inputs and outputs
+			- total possible number of inputs/outputs
+		- Ignores internal system structure (architecture etc)
+4. Types of tests
+	1. Unit Tests: check function of a single module (class, object) by observing processing of test data. Done by developer.
+	2. Integration Tests: checks the interaction between already unit tested components.
+	3. System test: is the final test in the development environment. 
+	4. User Acceptance: final test in the customer's production environment directed by customer; basis for accepting or rejecting product delivery.
+	5. Performance Tests
+		- Load: Tested system/component for reliability and conformance with specification in at the boundary of valid range.
+			- Cope with required number of users?
+			- System response within guaranteed response times?
+			- Can load be managed for indefinite amount of time?
+			- What is the load on expected bottlenecks?
+			- Are there unexpected bottle necks?
+		- Stress: Test sytem behavior when defined limits are exceeded
+			- What is the perofrmance when the system is overloaded?
+				- Thrashing
+				- Superlinear increase in response time
+				- System grinds to a halt
+			- Does the system return to normal behavior when no longer overloaded?
+				- How long does that take?
+5. Static QA methods
+	1. Types of reviews: Pair Programming -> Walkthrough -> Review -> Inspection
+		- Pair Programming: Engineers work in pairs to develop design/code
+		- Walkthrough: Developer walks team members through a design/section of code. Team members ask questions and comment on style, defects, conformance to developemtn standards, etc.
+		- Review: Semi-formal check of written document by 'external' (to team) expert
+		- Inspection: Formal (highly structured) audit using checklisits and reading techniques.
+	2. Cost/Benefit
+		- More than 50% of defects discovered are found using inspection
+		- Up to 90%, typically 50%-75%
+		- Relation of error fixing costs based on inspection vs testing
+			- Between 1:10 and 1:30
+		- Expensive, and using time of several (usually senior) developers
+	3. Why 'static' (as opposed to 'dynamic')?
+		- Dynamic methods ('testing') less thorough.
+		- Testing takes samples of system behavior
+			- Exhaustive testing typically not possible.
+			- Testing can only prove the presence of faults, not their absence.
+=== UNIT TEST CONCEPTS AND PATTERNS ===
+
