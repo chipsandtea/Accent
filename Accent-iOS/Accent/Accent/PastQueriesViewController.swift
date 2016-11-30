@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import SCLAlertView
+import AVFoundation
 
 class PastQueriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -18,6 +19,8 @@ class PastQueriesViewController: UIViewController, UITableViewDataSource, UITabl
     
     @IBOutlet var getQueriesButton: UIButton!
     @IBOutlet var queriesTableView: UITableView!
+    
+    let speechSynthesizer = AVSpeechSynthesizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +35,11 @@ class PastQueriesViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("view appeared")
+        self.queriesTableView?.reloadData()
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -61,11 +69,12 @@ class PastQueriesViewController: UIViewController, UITableViewDataSource, UITabl
                 } else {
                     self.queries.removeAll()
                     for (_, jsonQuery) in json["content"] {
-                        self.queries.append(
+                        self.queries.insert(
                             Query (
                                 original: jsonQuery["speech"].stringValue,
                                 corrected: jsonQuery["corrected"].stringValue
-                            )
+                            ),
+                            at: 0
                         )
                         print(jsonQuery)
                     }
@@ -75,6 +84,15 @@ class PastQueriesViewController: UIViewController, UITableViewDataSource, UITabl
         self.queriesTableView?.reloadData()
         
     }
+    
+    func speak(sentence: String) {
+        let speech = AVSpeechUtterance(string: sentence)
+        
+        speech.pitchMultiplier = 0.75
+        
+        speechSynthesizer.speak(speech)
+    }
+    
     
     // Table View Protocol
     
@@ -92,6 +110,10 @@ class PastQueriesViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        speak(sentence: queries[indexPath.row].corrected)
     }
 
     
