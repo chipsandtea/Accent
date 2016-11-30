@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SCLAlertView
 
 class PastQueriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -50,19 +51,28 @@ class PastQueriesViewController: UIViewController, UITableViewDataSource, UITabl
             .responseJSON { response in
                 print(response)
                 
+                
                 let json = JSON(data: response.data!)
                 print(json)
                 
-                for (_, jsonQuery) in json["content"] {
-                    self.queries.append(
-                        Query (
-                            original: jsonQuery["speech"].stringValue,
-                            corrected: jsonQuery["corrected"].stringValue
+                if (json["error"].stringValue != "") {
+                    SCLAlertView().showError("Whoops!", subTitle: json["error"].stringValue)
+                    
+                } else {
+                    self.queries.removeAll()
+                    for (_, jsonQuery) in json["content"] {
+                        self.queries.append(
+                            Query (
+                                original: jsonQuery["speech"].stringValue,
+                                corrected: jsonQuery["corrected"].stringValue
+                            )
                         )
-                    )
-                    print(jsonQuery)
+                        print(jsonQuery)
+                    }
                 }
         }
+        
+        self.queriesTableView?.reloadData()
         
     }
     
