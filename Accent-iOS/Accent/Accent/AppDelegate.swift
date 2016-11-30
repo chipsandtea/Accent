@@ -18,6 +18,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         return true
     }
+    
+    func switchToTabBar(user: [User]) {
+        UIView.transition(with: self.window!, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            let oldState: Bool = UIView.areAnimationsEnabled
+            UIView.setAnimationsEnabled(false)
+            let vc = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CorrectionVC") as! CorrectionViewController)
+            let nc = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarNavigationVC") as! TabBarNavigationViewController)
+            let vc2 = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PastQueriesVC") as! PastQueriesViewController)
+            vc.user = user
+            vc2.user = user
+            vc2.getPastQueries()
+            nc.viewControllers = [vc, vc2]
+            self.window!.rootViewController = nc
+            UIView.setAnimationsEnabled(oldState)
+            }, completion: { (finished: Bool) -> () in
+        })
+    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

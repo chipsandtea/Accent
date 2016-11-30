@@ -11,22 +11,17 @@ import Speech
 import AVFoundation
 import Alamofire
 import SwiftyJSON
+import SCLAlertView
 
 class CorrectionViewController: UIViewController {
 
-    var user = User(
-        firstname:  "",
-        lastname:   "",
-        id:         "",
-        password:   "",
-        email:      "email@email.com"
-    )
-    @IBOutlet var correctedSentenceTextField: UITextView!
+    var user = [User]()
+    
+    @IBOutlet var correctedSentence: UILabel!
     @IBOutlet var sentenceTextField: UITextView!
     @IBOutlet var submitQueryButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -47,19 +42,32 @@ class CorrectionViewController: UIViewController {
 //        
 //    }
     @IBAction func submitButtonPressed(_ sender: AnyObject) {
+        self.correctSpeech()
+    }
+    
+    func correctSpeech() {
+        print(user)
         let parameters : [String : String] = [
-            "speech"    : sentenceTextField.text!,
-            "email"     : user.email
+            "speech"    : sentenceTextField.text!.lowercased(),
+            "email"     : user[0].email
         ]
         
         print(parameters)
         
         Alamofire.request("http://159.203.233.58/accent/default/api/sentence", method: .post, parameters: parameters, encoding: URLEncoding.default)
-            .responseString { response in
+            .responseJSON { response in
                 print(response)
-                //let json = JSON(data: response.data!)
                 
+                let json = JSON(data: response.data!)
+                print(json)
+                if (json["error"].stringValue != "") {
+                    SCLAlertView().showError("Whoops!", subTitle: json["error"].stringValue)
+                    
+                } else {
+                    self.correctedSentence.text = json["corrected"].stringValue
+                }
                 
         }
+        
     }
 }

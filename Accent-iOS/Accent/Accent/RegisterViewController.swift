@@ -9,13 +9,16 @@
 import UIKit
 import TextFieldEffects
 import Alamofire
+import SwiftyJSON
+import SCLAlertView
 
 class RegisterViewController: UIViewController {
     
-    @IBOutlet var registerUsername: IsaoTextField!
-    @IBOutlet var registerPassword: IsaoTextField!
-    @IBOutlet var registerRePassword: IsaoTextField!
+    @IBOutlet var registerFirstName: IsaoTextField!
+    @IBOutlet var registerLastName: IsaoTextField!
     @IBOutlet var registerEmail: IsaoTextField!
+    @IBOutlet var registerPassword: IsaoTextField!
+    
     
     @IBOutlet var registerButton: UIButton!
     
@@ -45,8 +48,8 @@ class RegisterViewController: UIViewController {
 //        )
         
         let parameters : [String : String] = [
-            "firstname" : registerUsername.text!,
-            "lastname"  : registerUsername.text!,
+            "firstname" : registerFirstName.text!,
+            "lastname"  : registerLastName.text!,
             "password"  : registerPassword.text!,
             "email"     : registerEmail.text!
         ]
@@ -54,9 +57,21 @@ class RegisterViewController: UIViewController {
         print(parameters)
         
         Alamofire.request("http://159.203.233.58/accent/default/api/acc", method: .post, parameters: parameters, encoding: URLEncoding.default)
-            .responseString { response in
+            .responseJSON { response in
                 
-                 print(response)
+                print(response)
+                
+                let json = JSON(data: response.data!)
+                
+                if (json["error"].stringValue != "") {
+                    SCLAlertView().showError("Whoops!", subTitle: json["error"].stringValue)
+                    
+                } else {
+                    let landingVC = self.storyboard?.instantiateViewController(withIdentifier: "LandingVC") as! LandingViewController
+                    self.navigationController?.pushViewController(landingVC, animated: true)
+                }
+                
+                
         }
         
     }
