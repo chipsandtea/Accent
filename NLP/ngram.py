@@ -9,9 +9,15 @@ class ngrammer:
     def __init__(self):
         self.tkns = dict()
 
+
     def getIndex(self, token):
         return self.tkns[token]
 
+    def pos_tag(self, list_of_ngrams):
+        pos_list = []
+        for ngram in list_of_ngrams:
+            pos_list.append(nltk.pos_tag(word_tokenize(ngram[0])))
+        return pos_list
 
     def queryAPI(self, body_dict):
         headers = {
@@ -42,6 +48,13 @@ class ngrammer:
         data = json.loads(unserialized_data.decode('utf-8'))
         trigram_probabilities = []
         for trigram_result in data['results']:
+            remake = []
+            #print(trigram_result['words'])
+            for word in word_tokenize(trigram_result['words']):
+                remake.append(self.capitalize(word))
+            #print(remake)
+            rebuilt = ' '.join(remake)
+            trigram_result['words'] = rebuilt
             print('Trigram: ' + trigram_result['words'] + ' | ' + 'Probability: ' + str(trigram_result['probability']))
             trigram_probabilities.append((trigram_result['words'], trigram_result['probability']))
         return trigram_probabilities
@@ -86,9 +99,14 @@ class ngrammer:
         remove_regex = remove_regex.replace("'","")
         remove_regex = remove_regex.replace("-","")
         pattern = r"[{}]".format(remove_regex)
-        raw = raw.lower()
         sanitized = re.sub(pattern,'',raw)
         return sanitized
+
+    def capitalize(self, word):
+        for tkn in self.tkns:
+            if word == tkn.lower():
+                word = tkn
+        return word
 
 
     def probabilities(self, raw):

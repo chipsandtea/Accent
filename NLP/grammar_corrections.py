@@ -17,28 +17,29 @@ class corrector:
 	# db -> list of tuples
 	# 1st coord -> list of tuples (words in order w/ tagging)
 	# dict
-	def pos_tag(self, list_of_ngrams):
-		pos_list = []
-		for ngram in list_of_ngrams:
-			pos_list.append(nltk.pos_tag(word_tokenize(ngram[0])))
-		return pos_list
+	
 
 
 	def check_tolerance(self):
 		for i in range(len(self.ngrams_with_pos)):
 			for word in self.ngrams_with_pos[i]['tuple']:
-				if word[1] == 'PRON':
-					print('PRON')
+				if word[1] == 'NNP':
+					print('Pronoun - Singular')
+					self.ngrams_with_pos[i]['probability'] = self.ngrams_with_pos[i]['probability'] + self.PRONOUN_TOLERANCE
+			if abs(self.ngrams_with_pos[i]['probability']) < self.CORRECTNESS_THRESHOLD:
+				self.ngrams_with_pos.pop(i,None)
 
 
 	def check(self, input_string):
 		ng = ngrammer()
+		sanitized_input = ng.sanitize(input_string)
+		trigram_list = ng.extractTrigrams(sanitized_input)
 		probabilities = ng.probabilities(input_string)
 		wrong_ngrams = []
 		for ngram_prob in probabilities:
 			if self.initial_flagging(float(ngram_prob[1])):
 				wrong_ngrams.append(ngram_prob)
-		pos_tagged_list = self.pos_tag(wrong_ngrams)
+		pos_tagged_list = ng.pos_tag(wrong_ngrams)
 
 		for ngram_index in range(len(pos_tagged_list)):
 			ngram_tuple = []
@@ -53,3 +54,7 @@ class corrector:
 		for i in self.ngrams_with_pos:
 			print(self.ngrams_with_pos[i]['tuple'])
 			print(self.ngrams_with_pos[i]['probability'])
+		self.check_tolerance()
+		for i in self.ngrams_with_pos:
+			print(self.ngrams_with_pos[i])
+
