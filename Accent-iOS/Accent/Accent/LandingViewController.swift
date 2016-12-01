@@ -60,49 +60,38 @@ class LandingViewController: UIViewController {
         print(parameters)
         
         var url = "http://159.203.233.58/accent/default/api/login/"
-        url += parameters["email"]!
-        url += "/"
-        url += parameters["password"]!
+        url += parameters["email"]! + "/" + parameters["password"]!
         
         print(url)
         
         Alamofire.request(url, method: .get, encoding: URLEncoding.default)
             .responseJSON { response in
-                
+                let description = response.description
                 print(response)
-                
-                let json = JSON(data: response.data!)
-                
-                if (json["error"].stringValue != "") {
-                    SCLAlertView().showError("Whoops!", subTitle: json["error"].stringValue)
-
+                if (description.substring(to: description.index(description.startIndex, offsetBy: 7)) == "FAILURE") {
+                    SCLAlertView().showError("Whoops!", subTitle: "Error connecting to server")
                 } else {
-                
-                    let user = User(
-                        firstname:  json["content"][0]["firstname"].stringValue,
-                        lastname:   json["content"][0]["lastname"].stringValue,
-                        id:         json["content"][0]["id"].stringValue,
-                        password:   json["content"][0]["password"].stringValue,
-                        email:      json["content"][0]["email"].stringValue
-                    )
+                    let json = JSON(data: response.data!)
                     
-                    
-                    let correctionVC = self.storyboard?.instantiateViewController(withIdentifier: "CorrectionVC") as! CorrectionViewController
-                    print(user)
-                    correctionVC.user = user
-                    
-                    self.navigationController?.pushViewController(correctionVC, animated: true)
+                    if (json["error"].stringValue != "") {
+                        SCLAlertView().showError("Whoops!", subTitle: json["error"].stringValue)
+
+                    } else {
+                        var myUser = [User]()
+                        let user = User(
+                            firstname:  json["content"][0]["firstname"].stringValue,
+                            lastname:   json["content"][0]["lastname"].stringValue,
+                            id:         json["content"][0]["id"].stringValue,
+                            password:   json["content"][0]["password"].stringValue,
+                            email:      json["content"][0]["email"].stringValue
+                        )
+                        myUser.append(user)
+                        
+                        
+                        let myDelegate = UIApplication.shared.delegate as! AppDelegate
+                        myDelegate.switchToTabBar(user: myUser)
+                    }
                 }
-             
-//                if (response.result.isSuccess) {
-//                    print("BIG SUCCESS")
-//                } else {
-//                    print("BIG ERROR")
-//                }
-                // SUCCESS: {"acc": {"errors": {}, "id": 15}, "status": "success"}
-                
-                
-                
         }
     }
     
