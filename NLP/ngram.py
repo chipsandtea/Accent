@@ -12,7 +12,7 @@ class ngrammer:
     def getIndex(self, token):
         return self.tkns[token]
 
-        
+
     def queryAPI(self, body_dict):
         headers = {
             # Request headers
@@ -52,6 +52,7 @@ class ngrammer:
         tokens = word_tokenize(input_string)
         for i in range(len(tokens)):
             self.tkns[tokens[i]] = i
+            print(self.tkns[tokens[i]])
         print('Tokens: ', end = '')
         print(tokens)
         numOfTokens = len(tokens)
