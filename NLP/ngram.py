@@ -7,7 +7,12 @@ import string, re
 # Queries the Microsoft LM API for joint probabilities of trigrams.
 class ngrammer:
     def __init__(self):
-        self.hello = "greetings"
+        self.tkns = dict()
+
+    def getIndex(self, token):
+        return self.tkns[token]
+
+        
     def queryAPI(self, body_dict):
         headers = {
             # Request headers
@@ -45,6 +50,8 @@ class ngrammer:
     def extractTrigrams(self, input_string):
         print('Raw: ' + input_string)
         tokens = word_tokenize(input_string)
+        for i in range(len(tokens)):
+            self.tkns[tokens[i]] = i
         print('Tokens: ', end = '')
         print(tokens)
         numOfTokens = len(tokens)
