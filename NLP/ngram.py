@@ -65,9 +65,9 @@ class ngrammer:
         tokens = word_tokenize(input_string)
         for i in range(len(tokens)):
             self.tkns[tokens[i]] = i
-            print(self.tkns[tokens[i]])
-        print('Tokens: ', end = '')
-        print(tokens)
+            #print(self.tkns[tokens[i]])
+        #print('Tokens: ', end = '')
+        #print(tokens)
         numOfTokens = len(tokens)
         if numOfTokens == 1:
             print('1')

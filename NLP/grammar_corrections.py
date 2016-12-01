@@ -3,7 +3,7 @@ import nltk
 from nltk import word_tokenize
 class corrector:
 	def __init__(self):
-		self.CORRECTNESS_THRESHOLD = 10.0
+		self.CORRECTNESS_THRESHOLD = 13
 		self.PRONOUN_TOLERANCE = 4.5
 		self.ngrams_with_pos = dict()
 
@@ -50,10 +50,10 @@ class corrector:
 			self.ngrams_with_pos[ngram_index]['probability'] = wrong_ngrams[ngram_index][1]
 
 
-		print(wrong_ngrams)
-		for i in self.ngrams_with_pos:
-			print(self.ngrams_with_pos[i]['tuple'])
-			print(self.ngrams_with_pos[i]['probability'])
+		#print(wrong_ngrams)
+		#for i in self.ngrams_with_pos:
+			#print(self.ngrams_with_pos[i]['tuple'])
+			#print(self.ngrams_with_pos[i]['probability'])
 		self.check_tolerance()
 		for i in self.ngrams_with_pos:
 			print(self.ngrams_with_pos[i])
