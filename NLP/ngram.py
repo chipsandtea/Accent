@@ -9,16 +9,18 @@ class ngrammer:
     def __init__(self):
         self.tkns = dict()
 
-
+    # Returns the index the token was received for reordering.
     def getIndex(self, token):
         return self.tkns[token]
 
+    # Tags the part of speech 
     def pos_tag(self, list_of_ngrams):
         pos_list = []
         for ngram in list_of_ngrams:
             pos_list.append(nltk.pos_tag(word_tokenize(ngram[0])))
         return pos_list
 
+    # Queries Microsoft LM api
     def queryAPI(self, body_dict):
         headers = {
             # Request headers
