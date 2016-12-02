@@ -82,17 +82,19 @@ class ngrammer:
         trigrams = set()
         [trigrams.add(gram) for gram in trigramGenerator]
         print(trigrams)
+        print('hi')
         return trigrams
         
 
     # Constructs and returns a dictionary obj that makes up the body of the API Query.
     def constructBody(self, trigrams):
+        print(trigrams)
         body = dict()
         body['queries'] = []
         for gram in trigrams:
             body['queries'].append(' '.join(list(gram)))
 
-        #print(body['queries'])
+        print(body)
         return body
 
     # Sanitizes the input by removing punctuation other than apostrophes and hyphens.
@@ -102,6 +104,7 @@ class ngrammer:
         remove_regex = remove_regex.replace("-","")
         pattern = r"[{}]".format(remove_regex)
         sanitized = re.sub(pattern,'',raw)
+        #print('sanitized ' + sanitized)
         return sanitized
 
     def capitalize(self, word):

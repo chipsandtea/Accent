@@ -1,6 +1,25 @@
 from grammar_corrections import corrector
 from ngram import ngrammer
+import unittest
 
 cc = corrector()
-cc.check("I think its a cup.")
-cc.check("Is that you're cup")
+cc.check("Is that you're cup?")
+
+class NgramTest(unittest.TestCase):
+
+	def setUp(self):
+		self.ng = ngrammer()
+
+	def testSanitize(self):
+		self.assertEqual(self.ng.sanitize("Is that you're cup?"), "Is that you're cup")
+
+	def testTrigramExtraction(self):
+		self.assertEqual(self.ng.extractTrigrams("Is that you're cup"), {('Is', 'that', 'you', "'re"), ('that', 'you', "'re", 'cup')})
+
+	def testConstructBody(self):
+		self.assertEqual(self.ng.constructBody({('I', 'think', 'its', 'a'), ('think', 'its', 'a', 'cup')}), \
+											{'queries': ['I think its a', 'think its a cup']})
+
+if __name__ == "__main__": 
+    unittest.main()
+    
