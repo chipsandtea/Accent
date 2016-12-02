@@ -1,0 +1,80 @@
+---
+- config:
+    - testset: "Accent api tests"
+
+- test:
+    - group: "Successful request"
+    - name: "Creating an account that does not exist"
+    - url: "/accent/default/api/acc"
+    - method: "POST"
+    - body: 'firstname=Leslie&lastname=Li&password=1234&email=test2@gmail.com'
+    - headers: {'Content Type': 'application/x-www-form-urlencoded'}
+    - expected_status: [200]
+    - compare : {jsonpath_mini: 'status', comparator: "eq", expected: "success"}
+
+
+- test:
+    - group: "Successful request" 
+    - name: "Login with matching email and password"
+    - url: "/accent/default/api/login/hello@gmail.com/12345"
+    - expected_status: [200]
+    - validators: 
+        - compare: {jsonpath_mini: 'status', comparator: "eq", expected: "success"}
+
+
+- test:
+    - group: "Successful request"
+    - name: "Correcting a sentence"
+    - url: "/accent/default/api/sentence"
+    - method: "POST"
+    - body: 'speech=this is youre cup&email=hello@gmail.com'
+    - headers: {'Content Type': 'application/x-www-form-urlencoded'}
+    - expected_status: [200]
+    - compare : {jsonpath_mini: 'status', comparator: "eq", expected: "success"}
+    - compare: {jsonpath_mini: 'speech', comparator: "eq", expected: "this is youre cup"}
+    - compare: {jsonpath_mini: 'corrected', comparator: "eq", expected: "This is your cup"}
+
+- test:
+    - group: "Successful request"
+    - name: "Getting a user's past sentence queries"
+    - url: "/accent/default/api/hello@gmail.com/get"
+    - expected_status: [200]
+    - compare : {jsonpath_mini: 'status', comparator: "eq", expected: "success"}
+
+
+- test:
+    - group: "Failure request" 
+    - name: "Creating an account that already exists"
+    - url: "/accent/default/api/acc"
+    - method: "POST"
+    - body: 'firstname=Leslie&lastname=Li&password=12345&email=hello@gmail.com'
+    - headers: {'Content Type': 'application/x-www-form-urlencoded'}
+    - expected_status: [200]
+    - validators: 
+        - compare: {jsonpath_mini: 'status', comparator: "eq", expected: "failure"}
+        - compare: {jsonpath_mini: 'error', comparator: "eq", expected: "email already exists"}
+
+
+- test:
+    - group: "Failure request" 
+    - name: "Login with mismatch email and password"
+    - url: "/accent/default/api/login/hello@gmail.com/wrongpassword"
+    - expected_status: [200]
+    - validators: 
+        - compare: {jsonpath_mini: 'status', comparator: "eq", expected: "failure"}
+        - compare: {jsonpath_mini: 'error', comparator: "eq", expected: "Email and password did not match"}
+
+- test:
+    - group: "Failure request"
+    - name: "Getting a user's past sentence queries with none returned"
+    - url: "/accent/default/api/testnone@gmail.com/get"
+    - expected_status: [200]
+    - compare : {jsonpath_mini: 'status', comparator: "eq", expected: "failure"}
+    - compare : {jsonpath_mini: 'error', comparator: "eq", expected: "null"}
+
+- test:
+    - group: "Invalid request"
+    - name: "Making a request to invalid endpoint"
+    - url: "/accent/default/api/invalid"
+    - expected_status: [400]
+
