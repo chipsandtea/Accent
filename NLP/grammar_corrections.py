@@ -7,6 +7,7 @@ class corrector:
 		self.PRONOUN_TOLERANCE = 4.5
 		self.ngrams_with_pos = dict()
 
+	# Scrolls through and makes initial flags of incorrectness.
 	def initial_flagging(self, ngram_prob):
 		if abs(ngram_prob) >= self.CORRECTNESS_THRESHOLD:
 			return True
@@ -18,12 +19,13 @@ class corrector:
 		for i in range(len(self.ngrams_with_pos)):
 			for word in self.ngrams_with_pos[i]['tuple']:
 				if word[1] == 'NNP':
-					print('Pronoun - Singular')
+					#print('Pronoun - Singular')
 					self.ngrams_with_pos[i]['probability'] = self.ngrams_with_pos[i]['probability'] + self.PRONOUN_TOLERANCE
 			if abs(self.ngrams_with_pos[i]['probability']) < self.CORRECTNESS_THRESHOLD:
 				self.ngrams_with_pos.pop(i,None)
 
 
+	# Performs the actual grammar checking.
 	def check(self, input_string):
 		ng = ngrammer()
 		sanitized_input = ng.sanitize(input_string)

@@ -57,13 +57,13 @@ class ngrammer:
             #print(remake)
             rebuilt = ' '.join(remake)
             trigram_result['words'] = rebuilt
-            print('Trigram: ' + trigram_result['words'] + ' | ' + 'Probability: ' + str(trigram_result['probability']))
+            print('4-Gram: ' + trigram_result['words'] + ' | ' + 'Probability: ' + str(trigram_result['probability']))
             trigram_probabilities.append((trigram_result['words'], trigram_result['probability']))
         return trigram_probabilities
 
     # Extract and returns the trigrams given a sanitized input string.
     def extractTrigrams(self, input_string):
-        print('Raw: ' + input_string)
+        #print('Raw: ' + input_string)
         tokens = word_tokenize(input_string)
         for i in range(len(tokens)):
             self.tkns[tokens[i]] = i
@@ -82,19 +82,18 @@ class ngrammer:
         trigrams = set()
         [trigrams.add(gram) for gram in trigramGenerator]
         print(trigrams)
-        print('hi')
         return trigrams
         
 
     # Constructs and returns a dictionary obj that makes up the body of the API Query.
     def constructBody(self, trigrams):
-        print(trigrams)
+        #print(trigrams)
         body = dict()
         body['queries'] = []
         for gram in trigrams:
             body['queries'].append(' '.join(list(gram)))
 
-        print(body)
+        #print(body)
         return body
 
     # Sanitizes the input by removing punctuation other than apostrophes and hyphens.

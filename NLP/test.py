@@ -2,9 +2,7 @@ from grammar_corrections import corrector
 from ngram import ngrammer
 import unittest
 
-cc = corrector()
-cc.check("Is that you're cup?")
-cc.check("Whos is that, Albert?")
+
 
 class NgramTest(unittest.TestCase):
 
