@@ -93,4 +93,4 @@ ENV/
 .ropeproject
 .DS_Store
 
-/stanford-parser-2012-03-09/
+release3.2/stanford-parser-2012-03-09/
