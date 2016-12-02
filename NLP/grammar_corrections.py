@@ -13,13 +13,7 @@ class corrector:
 		else:
 			return False
 
-	# modify first coodinate of each tuple to store a list of tuples
-	# db -> list of tuples
-	# 1st coord -> list of tuples (words in order w/ tagging)
-	# dict
-	
-
-
+	# Recheck the correctness of an ngram after applying tolerance.
 	def check_tolerance(self):
 		for i in range(len(self.ngrams_with_pos)):
 			for word in self.ngrams_with_pos[i]['tuple']:

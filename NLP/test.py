@@ -4,6 +4,7 @@ import unittest
 
 cc = corrector()
 cc.check("Is that you're cup?")
+cc.check("Whos is that, Albert?")
 
 class NgramTest(unittest.TestCase):
 
@@ -22,4 +23,3 @@ class NgramTest(unittest.TestCase):
 
 if __name__ == "__main__": 
     unittest.main()
-    
